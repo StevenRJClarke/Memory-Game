@@ -51,6 +51,11 @@ h1 {
     margin: 0 0 3em;
 }
 
+.card {
+    font-size: 33px;
+    color: white;
+}
+
 /*.deck .card {
     height: 125px;
     width: 125px;
