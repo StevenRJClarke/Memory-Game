@@ -2,6 +2,9 @@
  * Create a list that holds all of your cards
  */
 
+var cardList = $('.card');
+console.log(cardList);
+
 
 /*
  * Display the cards on the page
