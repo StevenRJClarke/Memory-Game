@@ -15,11 +15,11 @@ function shuffle(array) {
     var currentIndex = array.length, temporaryValue, randomIndex;
 
     while (currentIndex !== 0) {
-        randomIndex = Math.floor(Math.random() * currentIndex);
-        currentIndex -= 1;
-        temporaryValue = array[currentIndex];
-        array[currentIndex] = array[randomIndex];
-        array[randomIndex] = temporaryValue;
+        randomIndex = Math.floor(Math.random() * currentIndex); //Choose a random index from the card array (a number between 0 and 15)
+        currentIndex -= 1; //Decrement the current index by 1 (from 16 to 15, from 15 to 14 etc...)
+        temporaryValue = array[currentIndex]; //Store the currently indexed card
+        array[currentIndex] = array[randomIndex]; //Replace the currently indexed card with the randomly chosen card...
+        array[randomIndex] = temporaryValue; //...and replace the card that was randomly chosen with the currently index card... a swap!
     }
 
     return array;
