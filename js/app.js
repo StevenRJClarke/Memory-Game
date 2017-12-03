@@ -18,8 +18,10 @@ console.log(cardList);
 
 var front = '<div class=\'front\'></div>';
 var back = '<div class=\'back\'></div>';
+var flip = '<div class=\'flipper-container\'></div>';
 
 newList.each(function() {
+  $(this).wrap(flip);
   $(this).prepend(front);
   $(this).children('i').wrap(back);
 })
