@@ -16,6 +16,9 @@ console.log(cardList);
  var newList = shuffle(cardList);
  console.log(newList);
 
+var front = '<div class=\'front\'></div>';
+var back = '<div class=\'back\'></div>';
+
 // Shuffle function from http://stackoverflow.com/a/2450976
 function shuffle(array) {
     var currentIndex = array.length, temporaryValue, randomIndex;
