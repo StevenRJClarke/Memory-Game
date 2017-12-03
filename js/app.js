@@ -24,6 +24,10 @@ newList.each(function() {
   $(this).wrap(flip);
   $(this).prepend(front);
   $(this).children('i').wrap(back);
+
+  $(this).click(function() {
+    $(this).addClass('open');
+  })
 })
 
 // Shuffle function from http://stackoverflow.com/a/2450976
