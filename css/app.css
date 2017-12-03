@@ -69,6 +69,13 @@ h1 {
     background: #2e3d49;
 }
 
+.back {
+    background: #02b3e4;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
 /*.deck .card {
     height: 125px;
     width: 125px;
