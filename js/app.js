@@ -47,7 +47,7 @@ function shuffle(array) {
 
 // set up the event listener for a card. If a card is clicked:
 newList.each(function() {
-  $(this).click(cardClick);
+  $(this).one("click", cardClick);
 })
 function cardClick() {
   //  - display the card's symbol (put this functionality in another function that you call from this one)
