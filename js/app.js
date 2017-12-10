@@ -47,7 +47,7 @@ function shuffle(array) {
 
 // set up the event listener for a card. If a card is clicked:
 newList.each(function() {
-  $(this).one("click", cardClick);
+  $(this).click(cardClick);
 })
 
 var card;
@@ -64,10 +64,12 @@ function cardClick() {
     if($(openList[0]).find('i').attr('class')==$(openList[1]).find('i').attr('class')) {
       // *    + if the cards do match, lock the cards in the open position (put this functionality in another function that you call from this one)
       alert("Cards match");
+      openList = [];
     }
     else {
       // *    + if the cards do not match, remove the cards from the list and hide the card's symbol (put this functionality in another function that you call from this one)
       alert("Cards don't match");
+      openList = [];
     }
   }
 
