@@ -92,6 +92,11 @@ h1 {
     transform: rotateY(180deg);
 }
 
+.match {
+    cursor: default;
+    background: #02ccba;
+}
+
 /*.deck .card {
     height: 125px;
     width: 125px;

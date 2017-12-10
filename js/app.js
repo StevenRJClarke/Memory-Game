@@ -96,10 +96,8 @@ function toOpenList(card) {
 
 // Function to show matched cards
 function match(card1, card2) {
-  console.log(card1);
-  $(card1).addClass('match');
-  console.log(card2);
-  $(card2).addClass('match');
+  $(card1).find('.back').addClass('match');
+  $(card2).find('.back').addClass('match');
 }
 
 
