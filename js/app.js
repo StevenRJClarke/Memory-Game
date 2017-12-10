@@ -5,7 +5,7 @@
  var cardList = $('.card');
  cardList.each(function() {
   $(this).remove();
- })
+})
 
 
 /*
@@ -53,26 +53,30 @@ newList.each(function() {
 var card;
 
 function cardClick() {
+  var card = this;
+  console.log(card);
   //  - display the card's symbol (put this functionality in another function that you call from this one)
-  openCard(this);
+  openCard(card);
 
   // *  - add the card to a *list* of "open" cards (put this functionality in another function that you call from this one)
   window.setTimeout(function() {
-    toOpenList(this);
-  },2000);
+    toOpenList(card);
 
   // *  - if the list already has another card, check to see if the two cards match
   if (openList.length == 2) {
     if($(openList[0]).find('i').attr('class')==$(openList[1]).find('i').attr('class')) {
       // *    + if the cards do match, lock the cards in the open position (put this functionality in another function that you call from this one)
+      alert("Cards match");
+      match(openList[0],openList[1])
       openList = [];
     }
     else {
       // *    + if the cards do not match, remove the cards from the list and hide the card's symbol (put this functionality in another function that you call from this one)
-
+      alert("Cards don't match");
       openList = [];
     }
   }
+},2000);
 
 
 }
@@ -87,9 +91,16 @@ var openList = [];
 
 function toOpenList(card) {
   openList.push(card);
+
 }
 
-
+// Function to show matched cards
+function match(card1, card2) {
+  console.log(card1);
+  $(card1).addClass('match');
+  console.log(card2);
+  $(card2).addClass('match');
+}
 
 
 
