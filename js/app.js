@@ -54,7 +54,6 @@ var card;
 
 function cardClick() {
   var card = this;
-  console.log(card);
   //  - display the card's symbol (put this functionality in another function that you call from this one)
   openCard(card);
 
@@ -71,6 +70,7 @@ function cardClick() {
     }
     else {
       // *    + if the cards do not match, remove the cards from the list and hide the card's symbol (put this functionality in another function that you call from this one)
+      unmatch(openList[0],openList[1]);
       openList = [];
     }
   }
@@ -96,11 +96,27 @@ function toOpenList(card) {
 function match(card1, card2) {
   $(card1).find('.back').addClass('match');
   $(card2).find('.back').addClass('match');
-  $(card1).parent('.flipper-container').effect("shake");
-  $(card2).parent('.flipper-container').effect("shake");
+  $(card1).parent('.flipper-container').effect("shake", {times: 2, distance: 30});
+  $(card2).parent('.flipper-container').effect("shake", {times: 2, distance: 30});
 }
 
+// Function to show unmatched cards
+function unmatch(card1, card2) {
+  $(card1).find('.back').addClass('no-match');
+  $(card2).find('.back').addClass('no-match');
+  $(card1).parent('.flipper-container').effect("shake", {direction: "up", times: 2, distance: 30});
+  $(card2).parent('.flipper-container').effect("shake", {direction: "up", times: 2, distance: 30});
 
+  window.setTimeout(function() {
+    $(card1).removeClass('open');
+    $(card2).removeClass('open');
+
+    window.setTimeout(function() {
+      $(card1).find('.back').removeClass('no-match');
+      $(card2).find('.back').removeClass('no-match');
+    }, 800)
+  }, 800)
+}
 
 
 // *    + increment the move counter and display it on the page (put this functionality in another function that you call from this one)
