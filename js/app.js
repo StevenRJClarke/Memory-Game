@@ -76,7 +76,7 @@ function cardClick() {
       openList = [];
     }
   }
-},2000);
+},1200);
 
 
 }
