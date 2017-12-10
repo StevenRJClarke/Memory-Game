@@ -51,19 +51,18 @@ newList.each(function() {
 })
 //  - display the card's symbol (put this functionality in another function that you call from this one)
 function cardClick() {
-  console.log(this);
   $(this).addClass('open');
 
   // *  - add the card to a *list* of "open" cards (put this functionality in another function that you call from this one)
-  toOpenList();
+  toOpenList(this);
 }
 
 
 // Function to add "open" cards to list
 var openList = [];
 
-function toOpenList() {
-  openList.push($('.open'));
+function toOpenList(card) {
+  openList.push(card);
 }
 
 // *  - if the list already has another card, check to see if the two cards match
