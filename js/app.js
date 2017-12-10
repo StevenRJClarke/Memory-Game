@@ -66,13 +66,11 @@ function cardClick() {
   if (openList.length == 2) {
     if($(openList[0]).find('i').attr('class')==$(openList[1]).find('i').attr('class')) {
       // *    + if the cards do match, lock the cards in the open position (put this functionality in another function that you call from this one)
-      alert("Cards match");
       match(openList[0],openList[1])
       openList = [];
     }
     else {
       // *    + if the cards do not match, remove the cards from the list and hide the card's symbol (put this functionality in another function that you call from this one)
-      alert("Cards don't match");
       openList = [];
     }
   }
@@ -98,6 +96,8 @@ function toOpenList(card) {
 function match(card1, card2) {
   $(card1).find('.back').addClass('match');
   $(card2).find('.back').addClass('match');
+  $(card1).parent('.flipper-container').effect("shake");
+  $(card2).parent('.flipper-container').effect("shake");
 }
 
 
