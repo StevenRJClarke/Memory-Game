@@ -49,12 +49,28 @@ function shuffle(array) {
 newList.each(function() {
   $(this).one("click", cardClick);
 })
+
+var card;
+
 function cardClick() {
   //  - display the card's symbol (put this functionality in another function that you call from this one)
   openCard(this);
 
   // *  - add the card to a *list* of "open" cards (put this functionality in another function that you call from this one)
   toOpenList(this);
+
+  // *  - if the list already has another card, check to see if the two cards match
+  if (openList.length == 2) {
+    if($(openList[0]).find('i').attr('class')==$(openList[1]).find('i').attr('class')) {
+      // *    + if the cards do match, lock the cards in the open position (put this functionality in another function that you call from this one)
+      alert("Cards match");
+    }
+    else {
+      // *    + if the cards do not match, remove the cards from the list and hide the card's symbol (put this functionality in another function that you call from this one)
+      alert("Cards don't match");
+    }
+  }
+
 
 }
 
@@ -70,9 +86,9 @@ function toOpenList(card) {
   openList.push(card);
 }
 
-// *  - if the list already has another card, check to see if the two cards match
-// *    + if the cards do match, lock the cards in the open position (put this functionality in another function that you call from this one)
-// *    + if the cards do not match, remove the cards from the list and hide the card's symbol (put this functionality in another function that you call from this one)
+
+
+
 // *    + increment the move counter and display it on the page (put this functionality in another function that you call from this one)
 // *    + if all cards have matched, display a message with the final score (put this functionality in another function that you call from this one)
 
