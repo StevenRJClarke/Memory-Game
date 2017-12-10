@@ -49,14 +49,19 @@ function shuffle(array) {
 newList.each(function() {
   $(this).click(cardClick);
 })
-//  - display the card's symbol (put this functionality in another function that you call from this one)
 function cardClick() {
-  $(this).addClass('open');
+  //  - display the card's symbol (put this functionality in another function that you call from this one)
+  openCard(this);
 
   // *  - add the card to a *list* of "open" cards (put this functionality in another function that you call from this one)
   toOpenList(this);
+
 }
 
+//Function to open card
+function openCard(card) {
+  $(card).addClass('open');
+}
 
 // Function to add "open" cards to list
 var openList = [];
