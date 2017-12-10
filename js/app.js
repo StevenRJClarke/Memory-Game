@@ -3,6 +3,9 @@
  */
 
  var cardList = $('.card');
+ cardList.each(function() {
+  $(this).remove();
+ })
  console.log(cardList);
 
 
@@ -21,6 +24,7 @@
  var flip = '<div class=\'flipper-container\'></div>';
 
  newList.each(function() {
+  $('.deck').prepend($(this));
   $(this).wrap(flip);
   $(this).prepend(front);
   $(this).children('i').wrap(back);
