@@ -1,9 +1,15 @@
+// Reset the "moves" counter to 0, and stores the number of moves as a variable
+$('.moves').text('0');
+
+var moves = $('.moves').text();
+
 /*
  * Create a list that holds all of your cards
  */
 
  var cardList = $('.card');
  cardList.each(function() {
+  //Pick up each card in order to shuffle them
   $(this).remove();
 })
 
@@ -63,15 +69,26 @@ function cardClick() {
 
   // *  - if the list already has another card, check to see if the two cards match
   if (openList.length == 2) {
+    // Check whether the two cards have the same symbol
     if($(openList[0]).find('i').attr('class')==$(openList[1]).find('i').attr('class')) {
       // *    + if the cards do match, lock the cards in the open position (put this functionality in another function that you call from this one)
       match(openList[0],openList[1])
+
+      // Reset the open list
       openList = [];
+
+      // *    + increment the move counter and display it on the page (put this functionality in another function that you call from this one)
+      addMove();
     }
     else {
       // *    + if the cards do not match, remove the cards from the list and hide the card's symbol (put this functionality in another function that you call from this one)
       unmatch(openList[0],openList[1]);
+
+      // Reset the open list
       openList = [];
+
+      // *    + increment the move counter and display it on the page (put this functionality in another function that you call from this one)
+      addMove();
     }
   }
 },1200);
@@ -118,7 +135,15 @@ function unmatch(card1, card2) {
   }, 800)
 }
 
+// Function to increment the moves counter
 
-// *    + increment the move counter and display it on the page (put this functionality in another function that you call from this one)
+function addMove() {
+  moves++;
+  $('.moves').text(moves);
+}
+
+
+
+
 // *    + if all cards have matched, display a message with the final score (put this functionality in another function that you call from this one)
 
