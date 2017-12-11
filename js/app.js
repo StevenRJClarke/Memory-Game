@@ -140,6 +140,14 @@ function unmatch(card1, card2) {
 function addMove() {
   moves++;
   $('.moves').text(moves);
+
+  if (moves == 5) {
+    $('.stars li:nth-of-type(3)').children('i').removeClass('fa-star').addClass('fa-star-o');
+  } else if (moves == 10) {
+    $('.stars li:nth-of-type(2)').children('i').removeClass('fa-star').addClass('fa-star-o');
+  } else if (moves == 15) {
+    $('.stars li:nth-of-type(1)').children('i').removeClass('fa-star').addClass('fa-star-o');
+  }
 }
 
 
