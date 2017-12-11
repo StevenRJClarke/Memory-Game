@@ -1,13 +1,13 @@
 // Reset the "moves" counter to 0, and stores the number of moves as a variable
 $('.moves').text('0');
 
-var moves = $('.moves').text();
+let moves = $('.moves').text();
 
 /*
  * Create a list that holds all of your cards
  */
 
- var cardList = $('.card');
+ let cardList = $('.card');
  cardList.each(function() {
   //Pick up each card in order to shuffle them
   $(this).remove();
@@ -21,11 +21,11 @@ var moves = $('.moves').text();
  *   - add each card's HTML to the page
  */
 
- var newList = shuffle(cardList);
+ let newList = shuffle(cardList);
 
- var front = '<div class=\'front\'></div>';
- var back = '<div class=\'back\'></div>';
- var flip = '<div class=\'flipper-container\'></div>';
+ const front = '<div class=\'front\'></div>';
+ const back = '<div class=\'back\'></div>';
+ const flip = '<div class=\'flipper-container\'></div>';
 
  newList.each(function() {
   $('.deck').prepend($(this));
@@ -36,7 +36,7 @@ var moves = $('.moves').text();
 
 // Shuffle function from http://stackoverflow.com/a/2450976
 function shuffle(array) {
-  var currentIndex = array.length, temporaryValue, randomIndex;
+  let currentIndex = array.length, temporaryValue, randomIndex;
 
   while (currentIndex !== 0) {
         randomIndex = Math.floor(Math.random() * currentIndex); //Choose a random index from the card array (a number between 0 and 15)
@@ -56,10 +56,8 @@ newList.each(function() {
   $(this).click(cardClick);
 })
 
-var card;
-
 function cardClick() {
-  var card = this;
+  let card = this;
   //  - display the card's symbol (put this functionality in another function that you call from this one)
   openCard(card);
 
@@ -102,7 +100,7 @@ function openCard(card) {
 }
 
 // Function to add "open" cards to list
-var openList = [];
+let openList = [];
 
 function toOpenList(card) {
   openList.push(card);
