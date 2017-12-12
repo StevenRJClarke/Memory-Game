@@ -230,6 +230,7 @@ function restartGame() {
 
   //Reset stars
   star = 3;
+  $('.stars').find('i').removeClass('fa-star-o').addClass('fa-star');
 
   //turn cards over than shuffle
   newList.find('.card').removeClass('open');
