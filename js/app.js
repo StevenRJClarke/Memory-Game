@@ -17,7 +17,8 @@ const timer = "<div class=\"timer\">Time : <span class=\"time\">0</span> seconds
 $(timer).insertAfter('.restart')
 
 // Create victory modal
-let modal = "<div class=\"modal\"><h1>Congratulations! You've won the game.</h1><p>With " + moves + " moves, " + star + "stars and in " + time + " seconds</p><button class=\"button\"?Play again!</button></div>";
+let modal = "<div class=\"modal\"><h3>Congratulations! You've won the game.</h3><p>With <span class=\"move-modal\"></span> moves, <span class=\"star-modal\"></span> stars and in <span class=\"time-modal\"></span> seconds</p><button class=\"button\">Play again!</button></div>";
+$('.container').append(modal);
 
 //Function to set up and start the game (on page load and when refresh button clicked)
 function startGame() {
@@ -194,7 +195,11 @@ function winGame() {
   clearInterval(intervalID);
 
   // Create a modal
-  $('.container').append(modal);
+  $('.move-modal').text(moves);
+  $('.star-modal').text(star);
+  $('.time-modal').text(time);
+  $('.modal').css('display', 'flex');
+
 }
 
 //Function to set up and start the game (on page load and when refresh button clicked)
@@ -203,6 +208,7 @@ function restartGame() {
   //Reset moves counter
   moves = 0;
   $('.moves').text(moves);
+
 
   //Reset time
   time = 0
