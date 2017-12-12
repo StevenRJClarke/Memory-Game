@@ -1,10 +1,13 @@
-// Counter for number of moves (defined as picking two cards)
 let moves, cardList, newList;
 
 startGame();
 
 // Add functionality to restart button
 $('.restart').click(restartGame);
+
+// Add timer
+const timer = "<div class=\"timer\">Time : <span class=\"time\">0</span> seconds</div>";
+$(timer).insertAfter('.restart')
 
 //Function to set up and start the game (on page load and when refresh button clicked)
 function startGame() {
