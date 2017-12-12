@@ -19,6 +19,7 @@ $(timer).insertAfter('.restart')
 // Create victory modal
 let modal = "<div class=\"modal\"><h3>Congratulations! You've won the game.</h3><p>With <span class=\"move-modal\"></span> moves, <span class=\"star-modal\"></span> stars and in <span class=\"time-modal\"></span> seconds</p><button class=\"button\">Play again!</button></div>";
 $('.container').append(modal);
+$('.button').click(closeModal);
 
 //Function to set up and start the game (on page load and when refresh button clicked)
 function startGame() {
@@ -200,6 +201,12 @@ function winGame() {
   $('.time-modal').text(time);
   $('.modal').css('display', 'flex');
 
+}
+
+//Function to close modal
+function closeModal() {
+  $('.modal').css('display', 'none');
+  restartGame();
 }
 
 //Function to set up and start the game (on page load and when refresh button clicked)
