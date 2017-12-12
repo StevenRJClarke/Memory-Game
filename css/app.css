@@ -145,3 +145,12 @@ h1 {
     width: 100%;
     z-index: 1;
 }
+
+.button {
+    background-color: #6f9;
+    border: none;
+    border-radius: 0.8em;
+    color: white;
+    font-size: 0.8em;
+    padding: 0.5em;
+}
