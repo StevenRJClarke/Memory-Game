@@ -3,6 +3,7 @@ let cardList = [];
 let newList = [];
 let time = 0;
 let click = 0;
+let matches = 0;
 let intervalID;
 
 startGame();
@@ -94,6 +95,10 @@ function cardClick() {
       // *    + if the cards do match, lock the cards in the open position (put this functionality in another function that you call from this one)
       match(openList[0],openList[1])
 
+      if (matches == 8) {
+        winGame();
+      }
+
       // Reset the open list
       openList = [];
 
@@ -138,6 +143,7 @@ function toOpenList(card) {
 
 // Function to show matched cards
 function match(card1, card2) {
+  matches++;
   $(card1).find('.back').addClass('match');
   $(card2).find('.back').addClass('match');
   $(card1).parent('.flipper-container').effect("shake", {times: 2, distance: 30});
@@ -163,7 +169,6 @@ function unmatch(card1, card2) {
 }
 
 // Function to increment the moves counter
-
 function addMove() {
   moves++;
   $('.moves').text(moves);
@@ -177,10 +182,10 @@ function addMove() {
   }
 }
 
-
-
-
 // *    + if all cards have matched, display a message with the final score (put this functionality in another function that you call from this one)
+function winGame() {
+  alert('Won game!');
+}
 
 //Function to set up and start the game (on page load and when refresh button clicked)
 function restartGame() {
