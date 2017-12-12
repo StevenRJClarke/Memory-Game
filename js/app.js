@@ -15,6 +15,9 @@ $('.restart').click(restartGame);
 const timer = "<div class=\"timer\">Time : <span class=\"time\">0</span> seconds</div>";
 $(timer).insertAfter('.restart')
 
+// Create victory modal
+let modal = "<div class=\"modal\"><p>Congratulations! You've won the game.</p></div>";
+
 //Function to set up and start the game (on page load and when refresh button clicked)
 function startGame() {
 
@@ -184,8 +187,10 @@ function addMove() {
 
 // *    + if all cards have matched, display a message with the final score (put this functionality in another function that you call from this one)
 function winGame() {
-  alert('Won');
   clearInterval(intervalID);
+
+  // Create a modal
+  $('.deck').append(modal);
 }
 
 //Function to set up and start the game (on page load and when refresh button clicked)
