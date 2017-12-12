@@ -184,7 +184,8 @@ function addMove() {
 
 // *    + if all cards have matched, display a message with the final score (put this functionality in another function that you call from this one)
 function winGame() {
-  alert('Won game!');
+  alert('Won');
+  clearInterval(intervalID);
 }
 
 //Function to set up and start the game (on page load and when refresh button clicked)
@@ -201,6 +202,9 @@ function restartGame() {
 
   //Reset click
   click = 0;
+
+  //Reset matches
+  matches = 0;
 
   //turn cards over than shuffle
   newList.find('.card').removeClass('open');
