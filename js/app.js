@@ -1,6 +1,10 @@
-let moves;
+// Counter for number of moves (defined as picking two cards)
+let moves, cardList, newList;
 
 startGame();
+
+// Add functionality to restart button
+$('.restart').click(restartGame);
 
 //Function to set up and start the game (on page load and when refresh button clicked)
 function startGame() {
@@ -10,11 +14,8 @@ function startGame() {
 
   moves = $('.moves').text();
 
-/*
- * Create a list that holds all of your cards
- */
-
-  let cardList = $('.card');
+// * Create a list that holds all of your cards
+  cardList = $('.card');
 
   cardList.each(function() {
     //Pick up each card in order to shuffle them
@@ -22,20 +23,18 @@ function startGame() {
   })
 
 
-/*
- * Display the cards on the page
- *   - shuffle the list of cards using the provided "shuffle" method below
- *   - loop through each card and create its HTML
- *   - add each card's HTML to the page
- */
 
-  let newList = shuffle(cardList);
+// * Display the cards on the page
+// *   - shuffle the list of cards using the provided "shuffle" method below
+  newList = shuffle(cardList);
 
-  const front = '<div class=\'front\'></div>';
-  const back = '<div class=\'back\'></div>';
-  const flip = '<div class=\'flipper-container\'></div>';
-
+// *   - loop through each card and create its
   newList.each(function() {
+// *   - add each card's HTML to the page
+    const front = '<div class=\'front\'></div>';
+    const back = '<div class=\'back\'></div>';
+    const flip = '<div class=\'flipper-container\'></div>';
+
     $('.deck').prepend($(this));
     $(this).wrap(flip);
     $(this).prepend(front);
@@ -46,6 +45,9 @@ function startGame() {
   newList.each(function() {
     $(this).click(cardClick);
   })
+
+// store cards with extra HTML
+  newList = $('.flipper-container');
 }
 
 // Shuffle function from http://stackoverflow.com/a/2450976
@@ -159,3 +161,19 @@ function addMove() {
 
 // *    + if all cards have matched, display a message with the final score (put this functionality in another function that you call from this one)
 
+//Function to set up and start the game (on page load and when refresh button clicked)
+function restartGame() {
+
+  //Reset moves counter
+  moves = 0;
+  $('.moves').text(moves);
+
+  //turn cards over than shuffle
+  newList.find('.card').removeClass('open');
+  newList.find('.back').removeClass('match');
+  newList.detach();
+  newList = shuffle(newList);
+  newList.each(function() {
+    $('.deck').append($(this));
+  })
+}
