@@ -4,6 +4,7 @@ let newList = [];
 let time = 0;
 let click = 0;
 let matches = 0;
+let star = 3;
 let intervalID;
 
 startGame();
@@ -16,7 +17,7 @@ const timer = "<div class=\"timer\">Time : <span class=\"time\">0</span> seconds
 $(timer).insertAfter('.restart')
 
 // Create victory modal
-let modal = "<div class=\"modal\"><p>Congratulations! You've won the game.</p></div>";
+let modal = "<div class=\"modal\"><h1>Congratulations! You've won the game.</h1><p>With " + moves + " moves, " + star + "stars and in " + time + " seconds</p><button class=\"button\"?Play again!</button></div>";
 
 //Function to set up and start the game (on page load and when refresh button clicked)
 function startGame() {
@@ -176,12 +177,15 @@ function addMove() {
   moves++;
   $('.moves').text(moves);
 
-  if (moves == 5) {
+  if (moves == 8) {
     $('.stars li:nth-of-type(3)').children('i').removeClass('fa-star').addClass('fa-star-o');
-  } else if (moves == 10) {
+    star--;
+  } else if (moves == 16) {
     $('.stars li:nth-of-type(2)').children('i').removeClass('fa-star').addClass('fa-star-o');
-  } else if (moves == 15) {
+    star--;
+  } else if (moves == 24) {
     $('.stars li:nth-of-type(1)').children('i').removeClass('fa-star').addClass('fa-star-o');
+    star--;
   }
 }
 
@@ -190,7 +194,7 @@ function winGame() {
   clearInterval(intervalID);
 
   // Create a modal
-  $('.deck').append(modal);
+  $('.container').append(modal);
 }
 
 //Function to set up and start the game (on page load and when refresh button clicked)
@@ -210,6 +214,9 @@ function restartGame() {
 
   //Reset matches
   matches = 0;
+
+  //Reset stars
+  star = 3;
 
   //turn cards over than shuffle
   newList.find('.card').removeClass('open');

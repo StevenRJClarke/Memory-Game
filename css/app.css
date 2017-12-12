@@ -127,3 +127,20 @@ h1 {
     float: right;
     cursor: pointer;
 }
+
+/*
+ * Styles for the Modal
+ */
+
+.modal {
+    align-items: center;
+    background-color: white;
+    display: flex;
+    font-size: 32px;
+    height: 100%;
+    justify-content: center;
+    position: fixed;
+    top: 0;
+    width: 100%;
+    z-index: 1;
+}
