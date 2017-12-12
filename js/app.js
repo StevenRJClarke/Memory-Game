@@ -1,4 +1,9 @@
-let moves, cardList, newList;
+let moves = 0;
+let cardList = [];
+let newList = [];
+let time = 0;
+let click = 0;
+let intervalID;
 
 startGame();
 
@@ -18,39 +23,37 @@ function startGame() {
   moves = $('.moves').text();
 
 // * Create a list that holds all of your cards
-  cardList = $('.card');
+cardList = $('.card');
 
-  cardList.each(function() {
+cardList.each(function() {
     //Pick up each card in order to shuffle them
     $(this).remove();
   })
 
-
-
 // * Display the cards on the page
 // *   - shuffle the list of cards using the provided "shuffle" method below
-  newList = shuffle(cardList);
+newList = shuffle(cardList);
 
 // *   - loop through each card and create its
-  newList.each(function() {
+newList.each(function() {
 // *   - add each card's HTML to the page
-    const front = '<div class=\'front\'></div>';
-    const back = '<div class=\'back\'></div>';
-    const flip = '<div class=\'flipper-container\'></div>';
+const front = '<div class=\'front\'></div>';
+const back = '<div class=\'back\'></div>';
+const flip = '<div class=\'flipper-container\'></div>';
 
-    $('.deck').prepend($(this));
-    $(this).wrap(flip);
-    $(this).prepend(front);
-    $(this).children('i').wrap(back);
-  })
+$('.deck').prepend($(this));
+$(this).wrap(flip);
+$(this).prepend(front);
+$(this).children('i').wrap(back);
+})
 
 // set up the event listener for a card. If a card is clicked:
-  newList.each(function() {
-    $(this).click(cardClick);
-  })
+newList.each(function() {
+  $(this).click(cardClick);
+})
 
 // store cards with extra HTML
-  newList = $('.flipper-container');
+newList = $('.flipper-container');
 }
 
 // Shuffle function from http://stackoverflow.com/a/2450976
@@ -70,6 +73,12 @@ function shuffle(array) {
 
 // Function when card clicked
 function cardClick() {
+  // Start timer
+  click++;
+  if (click == 1) {
+    startTime();
+  }
+
   let card = this;
   //  - display the card's symbol (put this functionality in another function that you call from this one)
   openCard(card);
@@ -103,6 +112,15 @@ function cardClick() {
     }
   }
 },1200);
+}
+
+// Increment timer after first click
+function startTime() {
+    intervalID = window.setInterval(function() {
+
+      time++;
+      $('.time').text(time);
+    }, 1000);
 }
 
 //Function to open card
@@ -170,6 +188,14 @@ function restartGame() {
   //Reset moves counter
   moves = 0;
   $('.moves').text(moves);
+
+  //Reset time
+  time = 0
+  $('.time').text(time);
+  clearInterval(intervalID);
+
+  //Reset click
+  click = 0;
 
   //turn cards over than shuffle
   newList.find('.card').removeClass('open');
