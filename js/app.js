@@ -1,17 +1,25 @@
-// Reset the "moves" counter to 0, and stores the number of moves as a variable
-$('.moves').text('0');
+let moves;
 
-let moves = $('.moves').text();
+startGame();
+
+//Function to set up and start the game (on page load and when refresh button clicked)
+function startGame() {
+
+  // Reset the "moves" counter to 0, and stores the number of moves as a variable
+  $('.moves').text('0');
+
+  moves = $('.moves').text();
 
 /*
  * Create a list that holds all of your cards
  */
 
- let cardList = $('.card');
- cardList.each(function() {
-  //Pick up each card in order to shuffle them
-  $(this).remove();
-})
+  let cardList = $('.card');
+
+  cardList.each(function() {
+    //Pick up each card in order to shuffle them
+    $(this).remove();
+  })
 
 
 /*
@@ -21,18 +29,24 @@ let moves = $('.moves').text();
  *   - add each card's HTML to the page
  */
 
- let newList = shuffle(cardList);
+  let newList = shuffle(cardList);
 
- const front = '<div class=\'front\'></div>';
- const back = '<div class=\'back\'></div>';
- const flip = '<div class=\'flipper-container\'></div>';
+  const front = '<div class=\'front\'></div>';
+  const back = '<div class=\'back\'></div>';
+  const flip = '<div class=\'flipper-container\'></div>';
 
- newList.each(function() {
-  $('.deck').prepend($(this));
-  $(this).wrap(flip);
-  $(this).prepend(front);
-  $(this).children('i').wrap(back);
-})
+  newList.each(function() {
+    $('.deck').prepend($(this));
+    $(this).wrap(flip);
+    $(this).prepend(front);
+    $(this).children('i').wrap(back);
+  })
+
+// set up the event listener for a card. If a card is clicked:
+  newList.each(function() {
+    $(this).click(cardClick);
+  })
+}
 
 // Shuffle function from http://stackoverflow.com/a/2450976
 function shuffle(array) {
@@ -49,13 +63,7 @@ function shuffle(array) {
       return array;
     }
 
-
-
-// set up the event listener for a card. If a card is clicked:
-newList.each(function() {
-  $(this).click(cardClick);
-})
-
+// Function when card clicked
 function cardClick() {
   let card = this;
   //  - display the card's symbol (put this functionality in another function that you call from this one)
@@ -90,8 +98,6 @@ function cardClick() {
     }
   }
 },1200);
-
-
 }
 
 //Function to open card
