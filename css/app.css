@@ -52,6 +52,7 @@ h1 {
     list-style-type: none;
 }
 
+/* Card flipping animation taken from David Walsh Blog Create a CSS Flipping Animation tutorial */
 .flipper-container {
     perspective: 1000px;
 }
