@@ -1,20 +1,30 @@
 # Memory Game Project
 
+The Memory Game is a simple, fun game where players turn over cards two at a time in order to match the symbols on the backs of the card. If the cards match, they are left upturned. If they do not match, they are turned back face down. Players must memorize where certain cards are as they turn them. Player win by matching all pairs of cards.
+
 ## Table of Contents
 
-* [Instructions](#instructions)
-* [Contributing](#contributing)
+* [Install](#install)
+* [Play](#play)
 
-## Instructions
+## Install
 
-The starter project has some HTML and CSS styling to display a static version of the Memory Game project. You'll need to convert this project from a static project to an interactive one. This will require modifying the HTML and CSS files, but primarily the JavaScript file.
+```
+$ git clone https://github.com/StevenRJClarke/memory-game.git
+```
 
-To get started, open `js/app.js` and start building out the app's functionality
+## Play
 
-For specific, detailed instructions, look at the project instructions in the [Udacity Classroom](https://classroom.udacity.com/me).
+- Click on a card to turn it over and see its underlying symbol
+- Turn over a second card
+- If the cards match, they stay face up
+- If the cards do not match, they are returned face down
+- The player wins when all pairs of cards are matched
 
-## Contributing
+A timer begins after the first card is turned over. They game records the time elapsed and the number of moves taken (defined by pairs of cards turned over) until victory. A number of stars are also recorded:
 
-This repository is the starter code for _all_ Udacity students. Therefore, we most likely will not accept pull requests.
+- 3 stars if less than 8 moves
+- 2 stars if less than 16 moves
+- 1 star if less than 24 moves
 
-For details, check out [CONTRIBUTING.md](CONTRIBUTING.md).
+Players can restart the game. The cards will be shuffled.
