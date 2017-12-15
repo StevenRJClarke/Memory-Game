@@ -8,8 +8,6 @@ let matches = 0;
 let star = 3;
 let intervalID;
 
-startGame();
-
 // Add functionality to restart button
 $('.restart').click(restartGame);
 
@@ -21,6 +19,8 @@ $(timer).insertAfter('.restart')
 let modal = "<div class=\"modal\"><h3>Congratulations! You've won the game.</h3><p>With <span class=\"move-modal\"></span> moves, <span class=\"star-modal\"></span> stars and in <span class=\"time-modal\"></span> seconds</p><button class=\"button\">Play again!</button></div>";
 $('.container').append(modal);
 $('.button').click(closeModal);
+
+startGame();
 
 //Function to set up and start the game (on page load and when refresh button clicked)
 function startGame() {
