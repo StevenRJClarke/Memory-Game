@@ -185,9 +185,6 @@ function addMove() {
   } else if (moves == 16) {
     $('.stars li:nth-of-type(2)').children('i').removeClass('fa-star').addClass('fa-star-o');
     star--;
-  } else if (moves == 24) {
-    $('.stars li:nth-of-type(1)').children('i').removeClass('fa-star').addClass('fa-star-o');
-    star--;
   }
 }
 
