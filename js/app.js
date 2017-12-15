@@ -105,15 +105,15 @@ function cardClick() {
         // *    + if the cards do match, lock the cards in the open position (put this functionality in another function that you call from this one)
         match(openList[0],openList[1])
 
-        if (matches == 8) {
-          winGame();
-        }
-
         // Reset the open list
         openList = [];
 
         // *    + increment the move counter and display it on the page (put this functionality in another function that you call from this one)
         addMove();
+
+        if (matches == 8) {
+          winGame();
+        }
       }
       else {
         // *    + if the cards do not match, remove the cards from the list and hide the card's symbol (put this functionality in another function that you call from this one)
