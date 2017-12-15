@@ -1,6 +1,7 @@
 let moves = 0;
 let cardList = [];
 let newList = [];
+let openList = [];
 let time = 0;
 let click = 0;
 let matches = 0;
@@ -29,38 +30,38 @@ function startGame() {
 
   moves = $('.moves').text();
 
-// * Create a list that holds all of your cards
-cardList = $('.card');
+  // * Create a list that holds all of your cards
+  cardList = $('.card');
 
-cardList.each(function() {
-    //Pick up each card in order to shuffle them
-    $(this).remove();
+  cardList.each(function() {
+      //Pick up each card in order to shuffle them
+      $(this).remove();
+    })
+
+  // * Display the cards on the page
+  // *   - shuffle the list of cards using the provided "shuffle" method below
+  newList = shuffle(cardList);
+
+  // *   - loop through each card and create its
+  newList.each(function() {
+    // *   - add each card's HTML to the page
+    const front = '<div class=\'front\'></div>';
+    const back = '<div class=\'back\'></div>';
+    const flip = '<div class=\'flipper-container\'></div>';
+
+    $('.deck').prepend($(this));
+    $(this).wrap(flip);
+    $(this).prepend(front);
+    $(this).children('i').wrap(back);
   })
 
-// * Display the cards on the page
-// *   - shuffle the list of cards using the provided "shuffle" method below
-newList = shuffle(cardList);
+  // set up the event listener for a card. If a card is clicked:
+  newList.each(function() {
+    $(this).click(cardClick);
+  })
 
-// *   - loop through each card and create its
-newList.each(function() {
-// *   - add each card's HTML to the page
-const front = '<div class=\'front\'></div>';
-const back = '<div class=\'back\'></div>';
-const flip = '<div class=\'flipper-container\'></div>';
-
-$('.deck').prepend($(this));
-$(this).wrap(flip);
-$(this).prepend(front);
-$(this).children('i').wrap(back);
-})
-
-// set up the event listener for a card. If a card is clicked:
-newList.each(function() {
-  $(this).click(cardClick);
-})
-
-// store cards with extra HTML
-newList = $('.flipper-container');
+  // store cards with extra HTML
+  newList = $('.flipper-container');
 }
 
 // Shuffle function from http://stackoverflow.com/a/2450976
@@ -127,21 +128,23 @@ function cardClick() {
 
 // Increment timer after first click
 function startTime() {
-    intervalID = window.setInterval(function() {
+  intervalID = window.setInterval(function() {
 
-      time++;
-      $('.time').text(time);
-    }, 1000);
+    // Time increments by 1 second
+    time++;
+    $('.time').text(time);
+  }, 1000);
 }
 
 //Function to open card
 function openCard(card) {
   $(card).addClass('open');
+
+  // Remove event listener so the same card cannot be clicked twice to get a match
+  $(card).off('click');
 }
 
 // Function to add "open" cards to list
-let openList = [];
-
 function toOpenList(card) {
   openList.push(card);
 
@@ -149,25 +152,39 @@ function toOpenList(card) {
 
 // Function to show matched cards
 function match(card1, card2) {
+  // Increment number of matches
   matches++;
+
+  // Add match styling
   $(card1).find('.back').addClass('match');
   $(card2).find('.back').addClass('match');
+
+  // Add match animation
   $(card1).parent('.flipper-container').effect("shake", {times: 2, distance: 30});
   $(card2).parent('.flipper-container').effect("shake", {times: 2, distance: 30});
 }
 
 // Function to show unmatched cards
 function unmatch(card1, card2) {
+  // Add no match styling
   $(card1).find('.back').addClass('no-match');
   $(card2).find('.back').addClass('no-match');
+
+  // Add shake animation
   $(card1).parent('.flipper-container').effect("shake", {direction: "up", times: 2, distance: 30});
   $(card2).parent('.flipper-container').effect("shake", {direction: "up", times: 2, distance: 30});
 
   window.setTimeout(function() {
+    // Turn cards back over
     $(card1).removeClass('open');
     $(card2).removeClass('open');
 
+    //Reapply the event listener to unmatched cards
+    $(card1).click(cardClick);
+    $(card2).click(cardClick);
+
     window.setTimeout(function() {
+      // Remove the no match formatting
       $(card1).find('.back').removeClass('no-match');
       $(card2).find('.back').removeClass('no-match');
     }, 800)
@@ -179,6 +196,7 @@ function addMove() {
   moves++;
   $('.moves').text(moves);
 
+  // Remove stars after certain number of moves
   if (moves == 8) {
     $('.stars li:nth-of-type(3)').children('i').removeClass('fa-star').addClass('fa-star-o');
     star--;
@@ -213,7 +231,6 @@ function restartGame() {
   moves = 0;
   $('.moves').text(moves);
 
-
   //Reset time
   time = 0
   $('.time').text(time);
@@ -228,6 +245,12 @@ function restartGame() {
   //Reset stars
   star = 3;
   $('.stars').find('i').removeClass('fa-star-o').addClass('fa-star');
+
+  //Reset openList
+  openList = [];
+
+  // reapply the event listener for the cards that have been matched
+  newList.find('.match').parent('.card').click(cardClick)
 
   //turn cards over than shuffle
   newList.find('.card').removeClass('open');
