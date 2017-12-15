@@ -23,8 +23,8 @@ $ git clone https://github.com/StevenRJClarke/memory-game.git
 
 A timer begins after the first card is turned over. They game records the time elapsed and the number of moves taken (defined by pairs of cards turned over) until victory. A number of stars are also recorded:
 
-- 3 stars if less than 8 moves
-- 2 stars if less than 16 moves
-- 1 star if less than 24 moves
+- 3 stars if less than  or equal to 12 moves
+- 2 stars if less than or equal to 24 moves
+- 1 star if more than 24 moves
 
 Players can restart the game. The cards will be shuffled.
