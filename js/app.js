@@ -196,10 +196,10 @@ function addMove() {
   $('.moves').text(moves);
 
   // Remove stars after certain number of moves
-  if (moves == 8) {
+  if (moves == 12) {
     $('.stars li:nth-of-type(3)').children('i').removeClass('fa-star').addClass('fa-star-o');
     star--;
-  } else if (moves == 16) {
+  } else if (moves == 24) {
     $('.stars li:nth-of-type(2)').children('i').removeClass('fa-star').addClass('fa-star-o');
     star--;
   }
