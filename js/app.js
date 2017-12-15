@@ -34,9 +34,9 @@ function startGame() {
   cardList = $('.card');
 
   cardList.each(function() {
-      //Pick up each card in order to shuffle them
+    //Pick up each card in order to shuffle them
       $(this).remove();
-    })
+  })
 
   // * Display the cards on the page
   // *   - shuffle the list of cards using the provided "shuffle" method below
@@ -69,15 +69,15 @@ function shuffle(array) {
   let currentIndex = array.length, temporaryValue, randomIndex;
 
   while (currentIndex !== 0) {
-        randomIndex = Math.floor(Math.random() * currentIndex); //Choose a random index from the card array (a number between 0 and 15)
-        currentIndex -= 1; //Decrement the current index by 1 (from 16 to 15, from 15 to 14 etc...)
-        temporaryValue = array[currentIndex]; //Store the currently indexed card
-        array[currentIndex] = array[randomIndex]; //Replace the currently indexed card with the randomly chosen card...
-        array[randomIndex] = temporaryValue; //...and replace the card that was randomly chosen with the currently index card... a swap!
-      }
+    randomIndex = Math.floor(Math.random() * currentIndex); //Choose a random index from the card array (a number between 0 and 15)
+    currentIndex -= 1; //Decrement the current index by 1 (from 16 to 15, from 15 to 14 etc...)
+    temporaryValue = array[currentIndex]; //Store the currently indexed card
+    array[currentIndex] = array[randomIndex]; //Replace the currently indexed card with the randomly chosen card...
+    array[randomIndex] = temporaryValue; //...and replace the card that was randomly chosen with the currently index card... a swap!
+  }
 
-      return array;
-    }
+  return array;
+}
 
 // Function when card clicked
 function cardClick() {
@@ -87,6 +87,9 @@ function cardClick() {
     startTime();
   }
 
+  // Remove event listener so the same card cannot be clicked twice to get a match
+  $(this).off('click');
+
   let card = this;
   //  - display the card's symbol (put this functionality in another function that you call from this one)
   openCard(card);
@@ -95,35 +98,35 @@ function cardClick() {
   window.setTimeout(function() {
     toOpenList(card);
 
-  // *  - if the list already has another card, check to see if the two cards match
-  if (openList.length == 2) {
-    // Check whether the two cards have the same symbol
-    if($(openList[0]).find('i').attr('class')==$(openList[1]).find('i').attr('class')) {
-      // *    + if the cards do match, lock the cards in the open position (put this functionality in another function that you call from this one)
-      match(openList[0],openList[1])
+    // *  - if the list already has another card, check to see if the two cards match
+    if (openList.length == 2) {
+      // Check whether the two cards have the same symbol
+      if($(openList[0]).find('i').attr('class')==$(openList[1]).find('i').attr('class')) {
+        // *    + if the cards do match, lock the cards in the open position (put this functionality in another function that you call from this one)
+        match(openList[0],openList[1])
 
-      if (matches == 8) {
-        winGame();
+        if (matches == 8) {
+          winGame();
+        }
+
+        // Reset the open list
+        openList = [];
+
+        // *    + increment the move counter and display it on the page (put this functionality in another function that you call from this one)
+        addMove();
       }
+      else {
+        // *    + if the cards do not match, remove the cards from the list and hide the card's symbol (put this functionality in another function that you call from this one)
+        unmatch(openList[0],openList[1]);
 
-      // Reset the open list
-      openList = [];
+        // Reset the open list
+        openList = [];
 
-      // *    + increment the move counter and display it on the page (put this functionality in another function that you call from this one)
-      addMove();
+        // *    + increment the move counter and display it on the page (put this functionality in another function that you call from this one)
+        addMove();
+      }
     }
-    else {
-      // *    + if the cards do not match, remove the cards from the list and hide the card's symbol (put this functionality in another function that you call from this one)
-      unmatch(openList[0],openList[1]);
-
-      // Reset the open list
-      openList = [];
-
-      // *    + increment the move counter and display it on the page (put this functionality in another function that you call from this one)
-      addMove();
-    }
-  }
-},1200);
+  },1200);
 }
 
 // Increment timer after first click
@@ -139,15 +142,11 @@ function startTime() {
 //Function to open card
 function openCard(card) {
   $(card).addClass('open');
-
-  // Remove event listener so the same card cannot be clicked twice to get a match
-  $(card).off('click');
 }
 
 // Function to add "open" cards to list
 function toOpenList(card) {
   openList.push(card);
-
 }
 
 // Function to show matched cards
